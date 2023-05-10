@@ -1,0 +1,61 @@
+#include<stdio.h>
+
+#include<iostream>
+
+#include<cstdlib>
+
+
+#include<omp.h>
+
+using namespace std;
+
+#define MAX 10
+
+int main()
+
+int a[MAX],b[MAX],c[MAX],1; printf("In First Vector:\t");
+
+ //Instruct a master thread to fork and generate more threads to process following loop structur #pragma omp parallel for
+
+B for (1=0;1<MAX; 1++) 9- (
+
+a[1]=rand()%1000;
+
+1 } 2 //Discuss issue of this for loop below-if we make it parallel, possibly values that get printed will not be in sequence as we dont have any control an order of threads execution 3 for (1=0;1<MAX; 1++)
+
+(
+
+}
+
+printf("%d\t",a[1]);
+
+printf("In Second Vector: \t");
+
+#pragma omp parallel for for (1-0,1<MAX; 1++)
+
+- (
+
+ b[1]=rand()%1000;
+
+) 33 for (i=0;i<MAX; 1++)
+printf("%d\t",b[i]);
+
+}
+
+printf("\n Parallel-Vector Addition: (a,b,c)\t");
+
+#pragma omp parallel for
+
+for (i=0;i<MAX; i++)
+
+c[i]=a[i]+b[i];
+
+}
+
+}
+
+for(i=0;i<MAX; i++)
+
+printf("\n%d\c%d\t%d", a[i],b[i],c[i]);
+
+}
