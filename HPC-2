@@ -1,5 +1,8 @@
 
-2(A)
+2(A)---BUBBLE SORT CODE
+HPC-2(A)
+IMPLEMENT PARALLEL BUBBLE SORT 
+
 #include<iostream>
 #include<stdlib.h>
 #include<omp.h>
@@ -38,8 +41,10 @@ int main(){
  }
  return 0;
 }
+----------------------------------------
 
-2(B)
+2(B)---MERGE SORT CODE
+
 #include <vector>
 #include <algorithm>
 #include <thread>
