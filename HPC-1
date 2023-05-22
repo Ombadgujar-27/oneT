@@ -1,4 +1,4 @@
-HPC 1(A)
+HPC 1(A)--------------BFS CODE 
 #include <iostream>
 #include <queue>
 #include <vector>
@@ -64,75 +64,100 @@ int main() {
  parallelBFS(g, source);
  return 0;
 }
+
+--------------------------------------------------------
+ HPC1(B)------------DFS CODE
  
- HPC1(B)
- 
- #include <iostream>
-#include <stack>
+Parallel DFS program
+
+
+#include <iostream>
 #include <vector>
+#include <stack>
 #include <omp.h>
 using namespace std;
-// Define the graph using adjacency list
-struct Graph {
- int V; // number of vertices
- vector<vector<int>> adj; // adjacency list
- Graph(int v) {
- V = v;
- adj.resize(V);
- }
- void addEdge(int v, int w) {
- adj[v].push_back(w);
- }
+
+struct Graph{
+	int V;
+	vector<vector<int> >adj;
+	
+	Graph(int v){
+		V = v;
+		adj.resize(V);
+		
+	}
+	void addEdge(int v,int w){
+	 adj[v].push_back(w);
+
+}
 };
-void parallelDFS(Graph g, int source) {
- stack<int> s;
- vector<bool> visited(g.V, false);
- // Initialize with the source node
- s.push(source);
- while (!s.empty()) {
- int u = s.top();
- s.pop();
- if (!visited[u]) {
+
+void parallelDFS(Graph g, int source){
+
+
+stack<int> s; 
+vector<bool> visited(g.V, false);
+
+// Initialize with the source node
+
+s.push(source);
+
+while (!s.empty()) {
+int u = s.top();
+
+s.pop();
+
+if (!visited[u]) {
  visited[u] = true;
- #pragma omp parallel for
- for (int i = 0; i < g.adj[u].size(); i++) {
- int v = g.adj[u][i];
- // If v is not visited, add it to the stack
- if (!visited[v]) {
- s.push(v);
- }
- }
- }
- }
- 
- // Print the visited array to see the result
- cout << "Visited nodes: ";
- for (int i = 0; i < visited.size(); i++) {
- if (visited[i]) {
- cout << i << " ";
- }
- }
- cout << endl;
+
+#pragma omp parallel for
+
+for (int i = 0; i < g.adj[u].size(); i++) { 
+int v=g.adj[u][i];
+
+// If v is not visited, add it to the stack 
+if (!visited[v]) { 
+s.push(v);
+	}
+}
+}
+
+}
+//Print the visited array to see the result 
+cout << "Visited nodes: "; 
+for (int i = 0; i < visited.size(); i++) { 
+    if (visited[i]) { 
+        cout << i <<"";
+        
+    }
+}
+cout << endl;
 }
 int main() {
- cout<<"\n---Parallel Depth First Search---";
- int n;
- cout<<"\n Enter total number of pairs: ";
- cin>>n;
- 
- Graph g(n);
- 
- int u,v;
- cout<<" Enter edges: \n";
- for(int i=0; i<n; i++){
- cout<<" ";
- cin>>u>>v;
- g.addEdge(u, v);
- }
- int source = 2;
- parallelDFS(g, source);
- return 0;
+
+cout<<"\n---Parallel Depth First Search---";
+
+int n;
+
+cout<<"\n Enter total number of pairs: ";
+
+cin>>n;
+
+Graph g(n);
+
+int u,v;
+
+cout<<" Enter edges: \n"; 
+for(int i=0; i<n; i++){ 
+cout<<" ";
+cin>>u>>v; 
+g.addEdge(u, v);
 }
 
 
- 
+int source = 2; 
+parallelDFS(g, source);
+
+return 0;
+
+}
